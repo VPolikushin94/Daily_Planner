@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/colorPrimary"
     tools:context=".notes.ui.NotesFragment">
 
     <TextView
-        style="@style/header_tv_style"
         android:id="@+id/tv_header"
+        style="@style/header_tv_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/work_list"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -26,22 +27,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CalendarView
+    <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/calendar"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_header"
+        android:layout_width="wrap_content"
+        android:layout_height="388dp"
+        android:layout_marginTop="@dimen/size_12"
+        app:eventsEnabled="true"
+        app:firstDayOfWeek="monday"
+        app:forwardButtonSrc="@drawable/ic_arrow_forward"
+        app:headerColor="?attr/colorPrimary"
+        app:headerLabelColor="?attr/colorOnPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tv_header"
+        app:previousButtonSrc="@drawable/ic_arrow_previous"
+        app:selectionColor="@color/blue"
+        app:selectionLabelColor="?attr/colorPrimary"
+        app:todayLabelColor="@color/blue"
+        app:type="one_day_picker"
+        app:typeface="@font/ys_text_regular" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_timetable"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/size_8"
         android:paddingHorizontal="@dimen/size_16"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/calendar"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/timetable_item"/>
+        app:layout_constraintTop_toBottomOf="@id/calendar"
+        tools:listitem="@layout/timetable_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -53,4 +54,13 @@ dependencies {
 
     // Koin
     implementation("io.insert-koin:koin-android:3.4.2")
+
+    //Calendar
+    implementation("com.applandeo:material-calendar-view:1.9.0-rc04")
+
+    // Room
+    val roomVersion = "2.6.0"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
 }

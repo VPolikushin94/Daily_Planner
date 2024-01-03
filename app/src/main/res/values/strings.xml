@@ -3,4 +3,31 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="work_list">Список дел</string>
+
+    <string name="material_calendar_monday">П</string>
+    <string name="material_calendar_tuesday">В</string>
+    <string name="material_calendar_wednesday">С</string>
+    <string name="material_calendar_thursday">Ч</string>
+    <string name="material_calendar_friday">П</string>
+    <string name="material_calendar_saturday">С</string>
+    <string name="material_calendar_sunday">В</string>
+
+    <array name="material_calendar_months_array">
+        <item>Январь</item>
+        <item>Февраль</item>
+        <item>Март</item>
+        <item>Апрель</item>
+        <item>Май</item>
+        <item>Июнь</item>
+        <item>Июль</item>
+        <item>Август</item>
+        <item>Сентябрь</item>
+        <item>Октябрь</item>
+        <item>Ноябрь</item>
+        <item>Декабрь</item>
+    </array>
+
+    <string name="material_calendar_today_button">Today</string>
+    <string name="material_calendar_positive_button">OK</string>
+    <string name="material_calendar_negative_button">Cancel</string>
 </resources>

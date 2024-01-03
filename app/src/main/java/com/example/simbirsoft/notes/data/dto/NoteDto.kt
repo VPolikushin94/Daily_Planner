@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 data class NoteDto(
     val id: Int,
     @SerializedName("date_start")
-    val dateStart: Int,
+    val dateStart: Long,
     @SerializedName("date_finish")
-    val dateFinish: Int,
+    val dateFinish: Long,
     val name: String,
     val description: String
 )
