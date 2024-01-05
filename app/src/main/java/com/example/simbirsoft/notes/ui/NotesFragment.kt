@@ -8,10 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
-import com.applandeo.materialcalendarview.utils.isMonthAfter
-import com.example.simbirsoft.R
 import com.example.simbirsoft.databinding.FragmentNotesBinding
-import com.example.simbirsoft.notes.domain.models.Note
 import com.example.simbirsoft.notes.ui.models.NotesScreenState
 import com.example.simbirsoft.notes.ui.view_model.NotesViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,8 +37,14 @@ class NotesFragment : Fragment() {
             render(it)
         }
 
+        getMonthNotes()
         getFirstSelectedDateNotes()
         setClickListeners()
+    }
+
+    private fun getMonthNotes() {
+        val currentPageDate = binding.calendar.currentPageDate
+        viewModel.getMonthNoteList(currentPageDate)
     }
 
     private fun getFirstSelectedDateNotes() {
@@ -66,8 +69,14 @@ class NotesFragment : Fragment() {
 
     private fun render(state: NotesScreenState) {
         when (state) {
-            is NotesScreenState.Content -> {
-                setCalendarEvents(state.noteList)
+            is NotesScreenState.CalendarContent -> {
+                binding.calendar.setEvents(
+                    state.eventList
+                )
+            }
+
+            is NotesScreenState.TimetableContent -> {
+
             }
 
             is NotesScreenState.Error -> {
@@ -78,16 +87,5 @@ class NotesFragment : Fragment() {
 
             }
         }
-    }
-
-    private fun setCalendarEvents(noteList: List<Note>) {
-        val eventsList = mutableListOf<EventDay>()
-        noteList.forEach {
-            val calendar = Calendar.getInstance()
-            calendar.set(Calendar.DAY_OF_MONTH, it.id)
-            val eventDay = EventDay(calendar, R.drawable.ic_fire)
-            eventsList.add(eventDay)
-        }
-        binding.calendar.setEvents(eventsList)
     }
 }

@@ -2,6 +2,8 @@ package com.example.simbirsoft.notes.data.db.mapper
 
 import com.example.simbirsoft.notes.data.db.entity.NoteEntity
 import com.example.simbirsoft.notes.domain.models.Note
+import com.example.simbirsoft.util.toMillis
+import com.example.simbirsoft.util.toTimestamp
 import java.util.Calendar
 
 class NoteDbMapper {
@@ -9,8 +11,8 @@ class NoteDbMapper {
     fun map(note: Note): NoteEntity {
         return NoteEntity(
             note.id,
-            note.calendarStart.timeInMillis,
-            note.calendarFinish.timeInMillis,
+            note.calendarStart.timeInMillis.toTimestamp(),
+            note.calendarFinish.timeInMillis.toTimestamp(),
             note.name,
             note.description
         )
@@ -18,10 +20,11 @@ class NoteDbMapper {
 
     fun map(noteEntity: NoteEntity): Note {
         val calendarStart = Calendar.getInstance()
-        calendarStart.timeInMillis = noteEntity.dateStart
+        calendarStart.timeInMillis = noteEntity.dateStart.toMillis()
 
         val calendarFinish = Calendar.getInstance()
-        calendarStart.timeInMillis = noteEntity.dateFinish
+        calendarFinish.timeInMillis = noteEntity.dateFinish.toMillis()
+
         return Note(
             noteEntity.id,
             calendarStart,
