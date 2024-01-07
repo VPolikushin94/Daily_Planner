@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.example.simbirsoft.databinding.FragmentNotesBinding
+import com.example.simbirsoft.notes.domain.models.TimetableItem
+import com.example.simbirsoft.notes.ui.adapter.HourTimetableAdapter
 import com.example.simbirsoft.notes.ui.models.NotesScreenState
 import com.example.simbirsoft.notes.ui.view_model.NotesViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,6 +22,10 @@ class NotesFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: NotesViewModel by viewModel()
+
+    private var onNoteClickListener: ((TimetableItem) -> Unit)? = null
+
+    private var adapter: HourTimetableAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,9 +43,19 @@ class NotesFragment : Fragment() {
             render(it)
         }
 
-        getMonthNotes()
         getFirstSelectedDateNotes()
+        getMonthNotes()
         setClickListeners()
+        setRecyclerViewAdapter()
+
+    }
+
+
+    private fun setRecyclerViewAdapter() {
+        adapter = HourTimetableAdapter(
+            onNoteClickListener ?: throw NullPointerException("onNoteClickListener is not initialized")
+        )
+        binding.rvTimetable.adapter = adapter
     }
 
     private fun getMonthNotes() {
@@ -60,6 +76,10 @@ class NotesFragment : Fragment() {
                 Log.d("EVENTS_CAL", selectedDate.get(Calendar.DAY_OF_MONTH).toString())
             }
         })
+
+        onNoteClickListener = {
+            Log.d("NOTE_ID", it.id.toString())
+        }
     }
 
     override fun onDestroyView() {
@@ -76,7 +96,7 @@ class NotesFragment : Fragment() {
             }
 
             is NotesScreenState.TimetableContent -> {
-
+                adapter?.submitList(state.hourTimetableList)
             }
 
             is NotesScreenState.Error -> {

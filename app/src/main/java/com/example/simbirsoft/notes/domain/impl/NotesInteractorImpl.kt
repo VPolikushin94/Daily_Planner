@@ -2,6 +2,7 @@ package com.example.simbirsoft.notes.domain.impl
 
 import com.example.simbirsoft.notes.domain.api.NotesInteractor
 import com.example.simbirsoft.notes.domain.api.NotesRepository
+import com.example.simbirsoft.notes.domain.models.HourTimetableItem
 import com.example.simbirsoft.notes.domain.models.Note
 import com.example.simbirsoft.notes.domain.models.Resource
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +16,7 @@ class NotesInteractorImpl(
         return notesRepository.getMonthNoteList(calendar)
     }
 
-    override suspend fun getDayNoteList(calendar: Calendar): Flow<List<Note>> {
+    override suspend fun getDayNoteList(calendar: Calendar): Flow<List<HourTimetableItem>> {
         return notesRepository.getDayNoteList(calendar)
     }
 }
