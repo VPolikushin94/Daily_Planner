@@ -22,11 +22,12 @@
             android:id="@+id/tv_start_hour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_10"
             tools:text="0:00" />
 
         <View
             android:id="@+id/line"
-            android:layout_width="1.6dp"
+            android:layout_width="1dp"
             android:layout_height="10dp"
             android:background="?attr/colorOnPrimary" />
 
@@ -35,6 +36,7 @@
             android:id="@+id/tv_end_hour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_10"
             tools:text="01:00" />
 
     </LinearLayout>

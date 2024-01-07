@@ -6,15 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.applandeo.materialcalendarview.EventDay
+import com.applandeo.materialcalendarview.listeners.OnCalendarPageChangeListener
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.example.simbirsoft.databinding.FragmentNotesBinding
 import com.example.simbirsoft.notes.domain.models.TimetableItem
 import com.example.simbirsoft.notes.ui.adapter.HourTimetableAdapter
 import com.example.simbirsoft.notes.ui.models.NotesScreenState
 import com.example.simbirsoft.notes.ui.view_model.NotesViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.Calendar
 
 class NotesFragment : Fragment() {
 
@@ -39,15 +43,18 @@ class NotesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.screenState.observe(viewLifecycleOwner) {
-            render(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.screenState.collect {
+                    render(it)
+                }
+            }
         }
 
-        getFirstSelectedDateNotes()
-        getMonthNotes()
         setClickListeners()
+        getMonthNotes()
         setRecyclerViewAdapter()
-
+        getFirstSelectedDateNotes()
     }
 
 
@@ -73,10 +80,18 @@ class NotesFragment : Fragment() {
             override fun onDayClick(eventDay: EventDay) {
                 val selectedDate = eventDay.calendar
                 viewModel.getDayNoteList(selectedDate)
-                Log.d("EVENTS_CAL", selectedDate.get(Calendar.DAY_OF_MONTH).toString())
             }
         })
-
+        binding.calendar.setOnForwardPageChangeListener(object : OnCalendarPageChangeListener {
+            override fun onChange() {
+                getMonthNotes()
+            }
+        })
+        binding.calendar.setOnPreviousPageChangeListener(object : OnCalendarPageChangeListener {
+            override fun onChange() {
+                getMonthNotes()
+            }
+        })
         onNoteClickListener = {
             Log.d("NOTE_ID", it.id.toString())
         }
@@ -90,12 +105,14 @@ class NotesFragment : Fragment() {
     private fun render(state: NotesScreenState) {
         when (state) {
             is NotesScreenState.CalendarContent -> {
+                Log.d("EVENT_NOTE1", state.eventList.toString())
                 binding.calendar.setEvents(
                     state.eventList
                 )
             }
 
             is NotesScreenState.TimetableContent -> {
+                Log.d("EVENT_NOTE1", state.hourTimetableList.toString())
                 adapter?.submitList(state.hourTimetableList)
             }
 

@@ -1,6 +1,5 @@
 package com.example.simbirsoft.notes.data.repository
 
-import android.util.Log
 import com.example.simbirsoft.notes.data.db.AppDatabase
 import com.example.simbirsoft.notes.data.db.entity.NoteEntity
 import com.example.simbirsoft.notes.data.db.mapper.NoteDbMapper
@@ -14,11 +13,6 @@ import com.example.simbirsoft.notes.domain.models.HourTimetableItem
 import com.example.simbirsoft.notes.domain.models.Note
 import com.example.simbirsoft.notes.domain.models.Resource
 import com.example.simbirsoft.util.NetworkResultCode
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
 import java.util.Calendar
 
 class NotesRepositoryImpl(
@@ -30,7 +24,7 @@ class NotesRepositoryImpl(
 
     private val noteDao = appDatabase.noteDao()
 
-    override suspend fun getMonthNoteList(calendar: Calendar): Flow<Resource<List<Note>>> {
+    override suspend fun getMonthNoteList(calendar: Calendar): Resource<List<Note>> {
         val response = networkClient.request(NotesRequest())
 
         val month = calendar.get(Calendar.MONTH) + 1
@@ -47,34 +41,24 @@ class NotesRepositoryImpl(
                     noteDbMapper.map(it)
                 }
                 noteDao.insertNoteList(noteEntityList)
-
-                return noteDao.getMonthNotes(month, year).map { noteEntities ->
-                    getResource(noteEntities)
-                }
+                getResource(noteDao.getMonthNotes(month, year))
+                return getResource(noteDao.getMonthNotes(month, year))
             }
 
             NetworkResultCode.RESULT_ERROR -> {
-                return noteDao.getMonthNotes(month, year).map { noteEntities ->
-                    getResource(noteEntities, ErrorType.SERVER_ERROR)
-                }
+                return getResource(noteDao.getMonthNotes(month, year), ErrorType.SERVER_ERROR)
             }
 
-            else -> return noteDao.getMonthNotes(month, year).map { noteEntities ->
-                getResource(noteEntities, ErrorType.INTERNET_ERROR)
-            }
+            else -> return getResource(noteDao.getMonthNotes(month, year), ErrorType.INTERNET_ERROR)
         }
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    override suspend fun getDayNoteList(calendar: Calendar): Flow<List<HourTimetableItem>> {
+    override suspend fun getDayNoteList(calendar: Calendar): List<HourTimetableItem> {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val month = calendar.get(Calendar.MONTH) + 1
         val year = calendar.get(Calendar.YEAR)
 
-        return noteDao.getDayNotes(day, month, year).flatMapConcat {
-            Log.d("EVENT_NOTE1", it.toString())
-            flowOf(noteDbMapper.map(it, calendar))
-        }
+        return noteDbMapper.map(noteDao.getDayNotes(day, month, year), calendar)
     }
 
     private fun getResource(

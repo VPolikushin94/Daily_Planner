@@ -9,14 +9,14 @@
     <TextView
         style="@style/time_table_tv_style"
         android:id="@+id/tv_note_time"
-        android:paddingHorizontal="@dimen/size_18"
+        android:paddingHorizontal="@dimen/size_10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/tv_note_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="0:01 - 1:22" />
+        tools:text="02 Янв 0:01 - 03 Фев 1:22" />
 
     <TextView
         style="@style/note_name_tv_style"
@@ -29,6 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_note_time"
-        tools:text="Note 1sdgdfgdshddgfhdfghdfghdfghdfghgdfhgfdhdgf" />
+        android:textAlignment="center"
+        tools:text="Note 1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

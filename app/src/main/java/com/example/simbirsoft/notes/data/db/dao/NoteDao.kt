@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.simbirsoft.notes.data.db.entity.NoteEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDao {
@@ -23,7 +22,7 @@ interface NoteDao {
                 "CAST(strftime('%m',dateFinish,'unixepoch') AS INTEGER) = :month AND " +
                 "CAST(strftime('%Y',dateFinish,'unixepoch') AS INTEGER) = :year"
     )
-    fun getMonthNotes(month: Int, year: Int): Flow<List<NoteEntity>>
+    suspend fun getMonthNotes(month: Int, year: Int): List<NoteEntity>
 
     @Query(
         "SELECT * FROM notes_table WHERE " +
@@ -34,5 +33,5 @@ interface NoteDao {
                 "CAST(strftime('%m',dateFinish,'unixepoch') AS INTEGER) >= :month AND " +
                 "CAST(strftime('%Y',dateFinish,'unixepoch') AS INTEGER) >= :year"
     )
-    fun getDayNotes(day: Int, month: Int, year: Int): Flow<List<NoteEntity>>
+    suspend fun getDayNotes(day: Int, month: Int, year: Int): List<NoteEntity>
 }

@@ -13,6 +13,6 @@ fun Long.toMillis(): Long {
 }
 
 fun Date.getFormatString(): String {
-    val formatter = SimpleDateFormat("hh:mm", Locale.getDefault())
+    val formatter = SimpleDateFormat("d MMM H:mm", Locale.getDefault())
     return formatter.format(this)
 }

@@ -1,7 +1,5 @@
 package com.example.simbirsoft.notes.ui.view_model
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.applandeo.materialcalendarview.EventDay
@@ -12,62 +10,49 @@ import com.example.simbirsoft.notes.domain.models.Note
 import com.example.simbirsoft.notes.domain.models.Resource
 import com.example.simbirsoft.notes.ui.models.NotesScreenState
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Calendar
 
 class NotesViewModel(
     private val notesInteractor: NotesInteractor,
 ) : ViewModel() {
 
-    private val _screenState = MutableLiveData<NotesScreenState>()
-    val screenState: LiveData<NotesScreenState> = _screenState
+    private val _screenState = MutableSharedFlow<NotesScreenState>()
+    val screenState: SharedFlow<NotesScreenState> = _screenState
 
     fun getDayNoteList(calendar: Calendar) {
         viewModelScope.launch(Dispatchers.IO) {
-            notesInteractor.getDayNoteList(calendar)
-                .collect {
-                    _screenState.postValue(
-                        NotesScreenState.TimetableContent(it)
-                    )
-                }
+            val dayNoteList = notesInteractor.getDayNoteList(calendar)
+            _screenState.emit(NotesScreenState.TimetableContent(dayNoteList))
         }
     }
 
     fun getMonthNoteList(calendar: Calendar) {
-        _screenState.value = NotesScreenState.Loading
         viewModelScope.launch(Dispatchers.IO) {
-            notesInteractor.getMonthNoteList(calendar)
-                .collect {
-                    processResult(it)
-                }
+            _screenState.emit(NotesScreenState.Loading)
+            val monthNoteList = notesInteractor.getMonthNoteList(calendar)
+            processResult(monthNoteList)
         }
     }
 
-    private fun processResult(resource: Resource<List<Note>>) {
+    private suspend fun processResult(resource: Resource<List<Note>>) {
         when (resource) {
             is Resource.Success -> {
                 val events = getEventList(resource.data)
-                _screenState.postValue(
-                    NotesScreenState.CalendarContent(
-                        events
-                    )
-                )
+                _screenState.emit(NotesScreenState.CalendarContent(events))
             }
 
             is Resource.Error -> {
                 resource.data?.let {
                     val events = getEventList(it)
-                    _screenState.postValue(
-                        NotesScreenState.CalendarContent(
-                            events
-                        )
-                    )
+                    _screenState.emit(NotesScreenState.CalendarContent(events))
                 }
-                _screenState.postValue(
-                    NotesScreenState.Error(
-                        resource.errorType
-                    )
-                )
+                withContext(Dispatchers.Main) {
+                    _screenState.emit(NotesScreenState.Error(resource.errorType))
+                }
             }
         }
     }
