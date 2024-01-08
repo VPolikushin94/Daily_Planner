@@ -9,12 +9,22 @@
 
     <TextView
         android:id="@+id/tv_header"
-        style="@style/header_tv_style"
+        style="@style/HeaderTvStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/work_list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_add_note"
+        style="@style/ImageBackButtonStyle"
+        android:layout_marginEnd="@dimen/size_16"
+        android:contentDescription="@string/back_button"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="@id/tv_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_header" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -31,7 +41,7 @@
         android:id="@+id/calendar"
         android:layout_width="wrap_content"
         android:layout_height="388dp"
-        android:layout_marginTop="@dimen/size_12"
+        android:layout_marginTop="@dimen/size_4"
         app:eventsEnabled="true"
         app:firstDayOfWeek="monday"
         app:forwardButtonSrc="@drawable/ic_arrow_forward"
@@ -39,7 +49,7 @@
         app:headerLabelColor="?attr/colorOnPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_header"
+        app:layout_constraintTop_toBottomOf="@id/btn_add_note"
         app:previousButtonSrc="@drawable/ic_arrow_previous"
         app:selectionColor="@color/blue"
         app:selectionLabelColor="?attr/colorPrimary"

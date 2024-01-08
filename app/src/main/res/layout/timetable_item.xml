@@ -7,7 +7,7 @@
     android:layout_marginStart="@dimen/size_16">
 
     <TextView
-        style="@style/time_table_tv_style"
+        style="@style/TimeTableTvStyle"
         android:id="@+id/tv_note_time"
         android:paddingHorizontal="@dimen/size_10"
         android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
         tools:text="02 Янв 0:01 - 03 Фев 1:22" />
 
     <TextView
-        style="@style/note_name_tv_style"
+        style="@style/NoteNameTvStyle"
         android:id="@+id/tv_note_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toStartOf="@id/guide_line">
 
         <TextView
-            style="@style/time_table_tv_style"
+            style="@style/TimeTableTvStyle"
             android:id="@+id/tv_start_hour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:backgroundTint="@color/white"/>
 
         <TextView
-            style="@style/time_table_tv_style"
+            style="@style/TimeTableTvStyle"
             android:id="@+id/tv_end_hour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

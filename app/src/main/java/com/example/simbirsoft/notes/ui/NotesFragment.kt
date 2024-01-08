@@ -13,6 +13,7 @@ import com.applandeo.materialcalendarview.listeners.OnCalendarPageChangeListener
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.example.simbirsoft.R
 import com.example.simbirsoft.databinding.FragmentNotesBinding
+import com.example.simbirsoft.note_creator.ui.NoteCreatorFragment
 import com.example.simbirsoft.note_details.ui.NoteDetailFragment
 import com.example.simbirsoft.notes.domain.models.TimetableItem
 import com.example.simbirsoft.notes.ui.adapter.HourTimetableAdapter
@@ -98,6 +99,12 @@ class NotesFragment : Fragment() {
         onNoteClickListener = {
             parentFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, NoteDetailFragment.newInstance(it.id))
+                .addToBackStack(null)
+                .commit()
+        }
+        binding.btnAddNote.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, NoteCreatorFragment())
                 .addToBackStack(null)
                 .commit()
         }

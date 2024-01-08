@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/tv_header"
-        style="@style/header_tv_style"
+        style="@style/HeaderTvStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/details"
@@ -42,7 +42,7 @@
 
     <TextView
         android:id="@+id/tv_name"
-        style="@style/header_tv_style"
+        style="@style/HeaderTvStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
@@ -54,7 +54,7 @@
 
     <TextView
         android:id="@+id/tv_start"
-        style="@style/details_tv_style"
+        style="@style/DetailsTvStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_12"
@@ -64,7 +64,7 @@
 
     <TextView
         android:id="@+id/tv_date_start"
-        style="@style/details_tv_style"
+        style="@style/DetailsTvStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_8"
@@ -74,7 +74,7 @@
 
     <TextView
         android:id="@+id/tv_finish"
-        style="@style/details_tv_style"
+        style="@style/DetailsTvStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_8"
@@ -84,7 +84,7 @@
 
     <TextView
         android:id="@+id/tv_date_finish"
-        style="@style/details_tv_style"
+        style="@style/DetailsTvStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_8"
@@ -94,7 +94,7 @@
 
     <TextView
         android:id="@+id/tv_description"
-        style="@style/details_tv_style"
+        style="@style/DetailsTvStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_12"

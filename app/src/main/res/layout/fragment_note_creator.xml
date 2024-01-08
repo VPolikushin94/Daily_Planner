@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    tools:context=".note_creator.ui.NoteCreatorFragment">
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        style="@style/ImageBackButtonStyle"
+        android:layout_marginStart="@dimen/size_8"
+        android:contentDescription="@string/back_button"
+        app:layout_constraintBottom_toBottomOf="@id/tv_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_header" />
+
+    <TextView
+        android:id="@+id/tv_header"
+        style="@style/HeaderTvStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_task"
+        app:layout_constraintStart_toEndOf="@id/btn_back"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_begin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/size_16" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/size_16" />
+
+    <EditText
+        style="@style/DetailsTvStyle"
+        android:id="@+id/et_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8"
+        android:hint="@string/note_name"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="@dimen/size_16"
+        android:paddingEnd="0dp"
+        android:singleLine="true"
+        android:textColor="?attr/colorOnPrimary"
+        android:imeOptions="actionDone"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_begin"
+        app:layout_constraintTop_toBottomOf="@id/btn_back" />
+
+    <TextView
+        style="@style/DetailsTvStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_16"
+        app:layout_constraintStart_toStartOf="@id/gl_begin"
+        app:layout_constraintTop_toTopOf="@id/btn_pick_date_start"
+        app:layout_constraintBottom_toBottomOf="@id/btn_pick_date_start"
+        android:text="@string/start"/>
+
+    <Button
+        style="@style/BtnPickerStyle"
+        android:id="@+id/btn_pick_date_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_4"
+        app:layout_constraintEnd_toStartOf="@id/btn_pick_time_start"
+        app:layout_constraintTop_toTopOf="@id/btn_pick_time_start"
+        app:layout_constraintBottom_toBottomOf="@id/btn_pick_time_start"
+        tools:text="8 янв. 2024" />
+
+    <Button
+        style="@style/BtnPickerStyle"
+        android:id="@+id/btn_pick_time_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        app:layout_constraintTop_toBottomOf="@id/et_name"
+        tools:text="15:30" />
+
+    <TextView
+        style="@style/DetailsTvStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_16"
+        app:layout_constraintStart_toStartOf="@id/gl_begin"
+        app:layout_constraintTop_toTopOf="@id/btn_pick_date_end"
+        app:layout_constraintBottom_toBottomOf="@id/btn_pick_date_end"
+        android:text="@string/finish"/>
+
+    <Button
+        style="@style/BtnPickerStyle"
+        android:id="@+id/btn_pick_date_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_4"
+        app:layout_constraintEnd_toStartOf="@id/btn_pick_time_end"
+        app:layout_constraintTop_toTopOf="@id/btn_pick_time_end"
+        app:layout_constraintBottom_toBottomOf="@id/btn_pick_time_end"
+        tools:text="9 янв. 2024" />
+
+    <Button
+        style="@style/BtnPickerStyle"
+        android:id="@+id/btn_pick_time_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        app:layout_constraintTop_toBottomOf="@id/btn_pick_time_start"
+        tools:text="16:30" />
+
+    <EditText
+        android:id="@+id/et_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10"
+        android:hint="@string/note_creator_description"
+        android:paddingStart="@dimen/size_16"
+        android:paddingEnd="0dp"
+        android:textColor="?attr/colorOnPrimary"
+        android:imeOptions="actionDone"
+        android:maxLines="5"
+        android:inputType="textMultiLine"
+        android:scrollbars="vertical"
+        app:layout_constraintStart_toStartOf="@id/gl_begin"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        app:layout_constraintTop_toBottomOf="@id/btn_pick_time_end"/>
+
+    <Button
+        style="@style/BtnPickerStyle"
+        android:id="@+id/btn_save_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8"
+        android:layout_marginBottom="@dimen/size_18"
+        app:layout_constraintStart_toStartOf="@id/gl_begin"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/save" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

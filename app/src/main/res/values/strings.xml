@@ -7,5 +7,9 @@
     <string name="start">Начало:</string>
     <string name="finish">Конец:</string>
     <string name="description">Описание:  %s</string>
+    <string name="note_creator_description">Описание</string>
+    <string name="new_task">Новая задача</string>
+    <string name="note_name">Название</string>
+    <string name="save">Сохранить</string>
 
 </resources>

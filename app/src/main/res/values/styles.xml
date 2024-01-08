@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="header_tv_style">
+    <style name="HeaderTvStyle">
         <item name="android:layout_marginStart">@dimen/size_16</item>
         <item name="android:layout_marginTop">@dimen/size_18</item>
         <item name="android:fontFamily">"@font/ys_display_medium"</item>
@@ -8,19 +8,19 @@
         <item name="android:textSize">@dimen/text_size_22</item>
     </style>
 
-    <style name="note_name_tv_style">
+    <style name="NoteNameTvStyle">
         <item name="android:fontFamily">"@font/ys_display_medium"</item>
         <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:textSize">@dimen/text_size_20</item>
     </style>
 
-    <style name="time_table_tv_style">
+    <style name="TimeTableTvStyle">
         <item name="android:fontFamily">"@font/ys_text_regular"</item>
         <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:textSize">@dimen/text_size_8</item>
     </style>
 
-    <style name="details_tv_style">
+    <style name="DetailsTvStyle">
         <item name="android:fontFamily">"@font/ys_text_regular"</item>
         <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:textSize">@dimen/text_size_16</item>
@@ -34,4 +34,11 @@
         <item name="tint">?attr/colorOnPrimary</item>
         <item name="android:padding">16dp</item>
     </style>
+
+   <style name="BtnPickerStyle" parent="Widget.Material3.Button">
+       <item name="android:insetTop">0dp</item>
+       <item name="android:insetBottom">0dp</item>
+       <item name="android:textColor">@color/white</item>
+       <item name="android:backgroundTint">@color/blue</item>
+   </style>
 </resources>
