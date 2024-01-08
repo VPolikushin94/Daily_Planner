@@ -1,4 +1,4 @@
-package com.example.simbirsoft.notes.domain.models
+package com.example.simbirsoft.core.domain.models
 
 import java.util.Calendar
 

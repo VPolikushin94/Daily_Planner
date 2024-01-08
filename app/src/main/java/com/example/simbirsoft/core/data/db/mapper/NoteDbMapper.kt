@@ -1,8 +1,8 @@
-package com.example.simbirsoft.notes.data.db.mapper
+package com.example.simbirsoft.core.data.db.mapper
 
-import com.example.simbirsoft.notes.data.db.entity.NoteEntity
+import com.example.simbirsoft.core.data.db.entity.NoteEntity
 import com.example.simbirsoft.notes.domain.models.HourTimetableItem
-import com.example.simbirsoft.notes.domain.models.Note
+import com.example.simbirsoft.core.domain.models.Note
 import com.example.simbirsoft.notes.domain.models.TimetableItem
 import com.example.simbirsoft.util.getFormatString
 import com.example.simbirsoft.util.isSameDay

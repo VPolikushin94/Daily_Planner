@@ -6,7 +6,7 @@ import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.getDatesRange
 import com.example.simbirsoft.R
 import com.example.simbirsoft.notes.domain.api.NotesInteractor
-import com.example.simbirsoft.notes.domain.models.Note
+import com.example.simbirsoft.core.domain.models.Note
 import com.example.simbirsoft.notes.domain.models.Resource
 import com.example.simbirsoft.notes.ui.models.NotesScreenState
 import kotlinx.coroutines.Dispatchers

@@ -1,7 +1,6 @@
 package com.example.simbirsoft.notes.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnCalendarPageChangeListener
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
+import com.example.simbirsoft.R
 import com.example.simbirsoft.databinding.FragmentNotesBinding
+import com.example.simbirsoft.note_details.ui.NoteDetailFragment
 import com.example.simbirsoft.notes.domain.models.TimetableItem
 import com.example.simbirsoft.notes.ui.adapter.HourTimetableAdapter
 import com.example.simbirsoft.notes.ui.models.NotesScreenState
@@ -60,7 +61,8 @@ class NotesFragment : Fragment() {
 
     private fun setRecyclerViewAdapter() {
         adapter = HourTimetableAdapter(
-            onNoteClickListener ?: throw NullPointerException("onNoteClickListener is not initialized")
+            onNoteClickListener
+                ?: throw NullPointerException("onNoteClickListener is not initialized")
         )
         binding.rvTimetable.adapter = adapter
     }
@@ -80,6 +82,7 @@ class NotesFragment : Fragment() {
             override fun onDayClick(eventDay: EventDay) {
                 val selectedDate = eventDay.calendar
                 viewModel.getDayNoteList(selectedDate)
+                binding.rvTimetable.scrollToPosition(0)
             }
         })
         binding.calendar.setOnForwardPageChangeListener(object : OnCalendarPageChangeListener {
@@ -93,7 +96,10 @@ class NotesFragment : Fragment() {
             }
         })
         onNoteClickListener = {
-            Log.d("NOTE_ID", it.id.toString())
+            parentFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, NoteDetailFragment.newInstance(it.id))
+                .addToBackStack(null)
+                .commit()
         }
     }
 
@@ -105,14 +111,12 @@ class NotesFragment : Fragment() {
     private fun render(state: NotesScreenState) {
         when (state) {
             is NotesScreenState.CalendarContent -> {
-                Log.d("EVENT_NOTE1", state.eventList.toString())
                 binding.calendar.setEvents(
                     state.eventList
                 )
             }
 
             is NotesScreenState.TimetableContent -> {
-                Log.d("EVENT_NOTE1", state.hourTimetableList.toString())
                 adapter?.submitList(state.hourTimetableList)
             }
 

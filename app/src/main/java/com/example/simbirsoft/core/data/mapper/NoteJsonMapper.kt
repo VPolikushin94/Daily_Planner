@@ -1,6 +1,6 @@
-package com.example.simbirsoft.notes.data.mapper
+package com.example.simbirsoft.core.data.mapper
 
-import com.example.simbirsoft.notes.data.dto.NoteDto
+import com.example.simbirsoft.core.data.dto.NoteDto
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

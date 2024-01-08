@@ -19,4 +19,19 @@
         <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:textSize">@dimen/text_size_8</item>
     </style>
+
+    <style name="details_tv_style">
+        <item name="android:fontFamily">"@font/ys_text_regular"</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="ImageBackButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/ic_arrow_previous</item>
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="tint">?attr/colorOnPrimary</item>
+        <item name="android:padding">16dp</item>
+    </style>
 </resources>

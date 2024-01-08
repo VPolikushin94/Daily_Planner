@@ -1,16 +1,16 @@
 package com.example.simbirsoft.notes.data.repository
 
-import com.example.simbirsoft.notes.data.db.AppDatabase
-import com.example.simbirsoft.notes.data.db.entity.NoteEntity
-import com.example.simbirsoft.notes.data.db.mapper.NoteDbMapper
+import com.example.simbirsoft.core.data.db.AppDatabase
+import com.example.simbirsoft.core.data.db.entity.NoteEntity
+import com.example.simbirsoft.core.data.db.mapper.NoteDbMapper
 import com.example.simbirsoft.notes.data.dto.NotesRequest
 import com.example.simbirsoft.notes.data.dto.NotesResponse
-import com.example.simbirsoft.notes.data.mapper.NoteDtoMapper
-import com.example.simbirsoft.notes.data.network.api.NetworkClient
+import com.example.simbirsoft.core.data.mapper.NoteDtoMapper
+import com.example.simbirsoft.core.data.network.api.NetworkClient
 import com.example.simbirsoft.notes.domain.api.NotesRepository
 import com.example.simbirsoft.notes.domain.models.ErrorType
 import com.example.simbirsoft.notes.domain.models.HourTimetableItem
-import com.example.simbirsoft.notes.domain.models.Note
+import com.example.simbirsoft.core.domain.models.Note
 import com.example.simbirsoft.notes.domain.models.Resource
 import com.example.simbirsoft.util.NetworkResultCode
 import java.util.Calendar

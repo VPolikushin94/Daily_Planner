@@ -16,3 +16,8 @@ fun Date.getFormatString(): String {
     val formatter = SimpleDateFormat("d MMM H:mm", Locale.getDefault())
     return formatter.format(this)
 }
+
+fun Date.getFormatStringWithYear(): String {
+    val formatter = SimpleDateFormat("d MMM y H:mm", Locale.getDefault())
+    return formatter.format(this)
+}

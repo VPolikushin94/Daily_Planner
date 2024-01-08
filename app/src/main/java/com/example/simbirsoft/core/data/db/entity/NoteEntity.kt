@@ -1,4 +1,4 @@
-package com.example.simbirsoft.notes.data.db.entity
+package com.example.simbirsoft.core.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

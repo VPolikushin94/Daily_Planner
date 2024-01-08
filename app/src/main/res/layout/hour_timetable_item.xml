@@ -8,14 +8,16 @@
 
     <LinearLayout
         android:id="@+id/ll_times"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/time_background"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="6dp"
+        android:paddingVertical="@dimen/size_6"
+        android:paddingHorizontal="@dimen/size_4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guide_line">
 
         <TextView
             style="@style/time_table_tv_style"
@@ -23,13 +25,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_10"
+            android:textColor="@color/white"
             tools:text="0:00" />
 
         <View
             android:id="@+id/line"
             android:layout_width="1dp"
             android:layout_height="10dp"
-            android:background="?attr/colorOnPrimary" />
+            android:layout_marginVertical="@dimen/size_1"
+            android:background="@drawable/time_background"
+            android:backgroundTint="@color/white"/>
 
         <TextView
             style="@style/time_table_tv_style"
@@ -37,7 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_10"
-            tools:text="01:00" />
+            android:textColor="@color/white"
+            tools:text="1:00" />
 
     </LinearLayout>
 

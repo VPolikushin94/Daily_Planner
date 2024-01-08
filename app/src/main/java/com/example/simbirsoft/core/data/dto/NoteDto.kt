@@ -1,4 +1,4 @@
-package com.example.simbirsoft.notes.data.dto
+package com.example.simbirsoft.core.data.dto
 
 import com.google.gson.annotations.SerializedName
 

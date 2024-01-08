@@ -1,10 +1,10 @@
-package com.example.simbirsoft.notes.data.db.dao
+package com.example.simbirsoft.core.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.simbirsoft.notes.data.db.entity.NoteEntity
+import com.example.simbirsoft.core.data.db.entity.NoteEntity
 
 @Dao
 interface NoteDao {
@@ -14,6 +14,9 @@ interface NoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNoteList(noteEntityList: List<NoteEntity>)
+
+    @Query("SELECT * FROM notes_table WHERE id = :id")
+    suspend fun getNoteById(id: Int): NoteEntity
 
     @Query(
         "SELECT * FROM notes_table WHERE " +

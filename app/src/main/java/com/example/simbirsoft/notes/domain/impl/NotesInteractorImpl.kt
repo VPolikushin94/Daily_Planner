@@ -3,7 +3,7 @@ package com.example.simbirsoft.notes.domain.impl
 import com.example.simbirsoft.notes.domain.api.NotesInteractor
 import com.example.simbirsoft.notes.domain.api.NotesRepository
 import com.example.simbirsoft.notes.domain.models.HourTimetableItem
-import com.example.simbirsoft.notes.domain.models.Note
+import com.example.simbirsoft.core.domain.models.Note
 import com.example.simbirsoft.notes.domain.models.Resource
 import java.util.Calendar
 

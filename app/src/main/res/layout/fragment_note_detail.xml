@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    android:clickable="true"
+    tools:context=".note_details.ui.NoteDetailFragment">
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        style="@style/ImageBackButtonStyle"
+        android:layout_marginStart="@dimen/size_8"
+        android:contentDescription="@string/back_button"
+        app:layout_constraintBottom_toBottomOf="@id/tv_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_header" />
+
+    <TextView
+        android:id="@+id/tv_header"
+        style="@style/header_tv_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/details"
+        app:layout_constraintStart_toEndOf="@id/btn_back"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_begin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/size_16" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/size_16" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/header_tv_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="@dimen/size_8"
+        android:textSize="@dimen/text_size_20"
+        app:layout_constraintStart_toStartOf="@id/gl_begin"
+        app:layout_constraintTop_toBottomOf="@id/btn_back"
+        tools:text="Задача 1" />
+
+    <TextView
+        android:id="@+id/tv_start"
+        style="@style/details_tv_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:text="@string/start"
+        app:layout_constraintStart_toStartOf="@id/gl_begin"
+        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+    <TextView
+        android:id="@+id/tv_date_start"
+        style="@style/details_tv_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_8"
+        app:layout_constraintStart_toEndOf="@id/tv_start"
+        app:layout_constraintTop_toTopOf="@id/tv_start"
+        tools:text="2 янв. 2024 12:33" />
+
+    <TextView
+        android:id="@+id/tv_finish"
+        style="@style/details_tv_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8"
+        android:text="@string/finish"
+        app:layout_constraintStart_toStartOf="@id/gl_begin"
+        app:layout_constraintTop_toBottomOf="@id/tv_start" />
+
+    <TextView
+        android:id="@+id/tv_date_finish"
+        style="@style/details_tv_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_8"
+        app:layout_constraintStart_toEndOf="@id/tv_start"
+        app:layout_constraintTop_toTopOf="@id/tv_finish"
+        tools:text="3 янв. 2024 15:56" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        style="@style/details_tv_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:text="@string/description"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_begin"
+        app:layout_constraintTop_toBottomOf="@id/tv_finish" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

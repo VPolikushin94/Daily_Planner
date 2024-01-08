@@ -1,4 +1,4 @@
-package com.example.simbirsoft.notes.data.mock_data
+package com.example.simbirsoft.core.data.mock_data
 
 class MockNotes {
     //1: 4-6 Jan, 2: 4-8 Jan, 3: 4-4 Jan, 4: 6-8 Jan, 5: 7-8 Feb
