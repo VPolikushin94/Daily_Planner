@@ -4,7 +4,7 @@ import com.example.simbirsoft.core.data.db.entity.NoteEntity
 import com.example.simbirsoft.notes.domain.models.HourTimetableItem
 import com.example.simbirsoft.core.domain.models.Note
 import com.example.simbirsoft.notes.domain.models.TimetableItem
-import com.example.simbirsoft.util.getFormatString
+import com.example.simbirsoft.util.getFormatDateTimeWithoutYear
 import com.example.simbirsoft.util.isSameDay
 import com.example.simbirsoft.util.toMillis
 import com.example.simbirsoft.util.toTimestamp
@@ -46,10 +46,11 @@ class NoteDbMapper {
             )
         }
 
+        val calendarStart = Calendar.getInstance()
+        val calendarFinish = Calendar.getInstance()
+
         noteEntityList.forEach { noteEntity ->
-            val calendarStart = Calendar.getInstance()
             calendarStart.timeInMillis = noteEntity.dateStart.toMillis()
-            val calendarFinish = Calendar.getInstance()
             calendarFinish.timeInMillis = noteEntity.dateFinish.toMillis()
 
             val hourStart = if (isSameDay(calendarStart, currentDay)) {
@@ -68,7 +69,7 @@ class NoteDbMapper {
                     TimetableItem(
                         noteEntity.id,
                         noteEntity.name,
-                        calendarStart.time.getFormatString() + " - " + calendarFinish.time.getFormatString()
+                        calendarStart.time.getFormatDateTimeWithoutYear() + " - " + calendarFinish.time.getFormatDateTimeWithoutYear()
                     )
                 )
             }

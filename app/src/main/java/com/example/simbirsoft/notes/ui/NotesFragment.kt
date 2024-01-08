@@ -104,7 +104,12 @@ class NotesFragment : Fragment() {
         }
         binding.btnAddNote.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, NoteCreatorFragment())
+                .replace(
+                    R.id.fragment_container,
+                    NoteCreatorFragment.newInstance(
+                        viewModel.getSelectedDate()
+                    )
+                )
                 .addToBackStack(null)
                 .commit()
         }

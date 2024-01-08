@@ -41,4 +41,18 @@
        <item name="android:textColor">@color/white</item>
        <item name="android:backgroundTint">@color/blue</item>
    </style>
+
+    <style name="DatePickerStyle" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog.Picker.Date.Spinner">
+        <item name="android:windowBackground">?attr/colorSecondary</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/AppTheme.Alert.Button.Positive</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/AppTheme.Alert.Button.Negative</item>
+    </style>
+
+    <style name="AppTheme.Alert.Button.Positive" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <style name="AppTheme.Alert.Button.Negative" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/blue</item>
+    </style>
 </resources>

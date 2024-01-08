@@ -15,7 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.simbirsoft.databinding.FragmentNoteDetailBinding
 import com.example.simbirsoft.note_details.ui.models.NoteDetailsScreenState
 import com.example.simbirsoft.note_details.ui.view_model.NoteDetailsViewModel
-import com.example.simbirsoft.util.getFormatStringWithYear
+import com.example.simbirsoft.util.getFormatDateTime
 import kotlinx.coroutines.launch
 
 class NoteDetailFragment : Fragment() {
@@ -77,10 +77,10 @@ class NoteDetailFragment : Fragment() {
     private fun setContent(note: Note) {
         binding.tvName.text = note.name
 
-        val dateStart = note.calendarStart.time.getFormatStringWithYear()
+        val dateStart = note.calendarStart.time.getFormatDateTime()
         binding.tvDateStart.text = dateStart
 
-        val dateFinish = note.calendarFinish.time.getFormatStringWithYear()
+        val dateFinish = note.calendarFinish.time.getFormatDateTime()
         binding.tvDateFinish.text = dateFinish
 
         binding.tvDescription.text = getString(R.string.description, note.description)

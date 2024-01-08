@@ -23,7 +23,14 @@ class NotesViewModel(
     private val _screenState = MutableSharedFlow<NotesScreenState>()
     val screenState: SharedFlow<NotesScreenState> = _screenState
 
+    private var _selectedDate: Calendar? = null
+
+    fun getSelectedDate(): Calendar {
+        return _selectedDate ?: Calendar.getInstance()
+    }
+
     fun getDayNoteList(calendar: Calendar) {
+        _selectedDate = calendar
         viewModelScope.launch(Dispatchers.IO) {
             val dayNoteList = notesInteractor.getDayNoteList(calendar)
             _screenState.emit(NotesScreenState.TimetableContent(dayNoteList))

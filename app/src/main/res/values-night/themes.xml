@@ -3,5 +3,6 @@
     <style name="Base.Theme.SimbirSoft" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/pure_grey</item>
     </style>
 </resources>

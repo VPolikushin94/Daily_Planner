@@ -12,12 +12,22 @@ fun Long.toMillis(): Long {
     return this * 1000
 }
 
-fun Date.getFormatString(): String {
+fun Date.getFormatDateTimeWithoutYear(): String {
     val formatter = SimpleDateFormat("d MMM H:mm", Locale.getDefault())
     return formatter.format(this)
 }
 
-fun Date.getFormatStringWithYear(): String {
+fun Date.getFormatDateTime(): String {
     val formatter = SimpleDateFormat("d MMM y H:mm", Locale.getDefault())
+    return formatter.format(this)
+}
+
+fun Date.getFormatDate(): String {
+    val formatter = SimpleDateFormat("d MMM y", Locale.getDefault())
+    return formatter.format(this)
+}
+
+fun Date.getFormatTime(): String {
+    val formatter = SimpleDateFormat("H:mm", Locale.getDefault())
     return formatter.format(this)
 }
