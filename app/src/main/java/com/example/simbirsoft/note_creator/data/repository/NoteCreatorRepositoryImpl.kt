@@ -12,8 +12,9 @@ class NoteCreatorRepositoryImpl(
 
     private val noteDao = appDatabase.noteDao()
 
-    override suspend fun saveNote(note: Note) {
+    override suspend fun saveNote(note: Note): Boolean {
         val noteEntity = noteDbMapper.map(note)
-        noteDao.insertNote(noteEntity)
+        val isSaved = noteDao.insertNote(noteEntity)
+        return isSaved != -1L
     }
 }

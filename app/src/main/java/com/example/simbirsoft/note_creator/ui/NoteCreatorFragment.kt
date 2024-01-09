@@ -3,11 +3,15 @@ package com.example.simbirsoft.note_creator.ui
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -43,13 +47,20 @@ class NoteCreatorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val selectedDate = requireArguments().getSerializable(CALENDAR) as Calendar
+        val selectedDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requireArguments().getSerializable(CALENDAR, Calendar::class.java) ?: Calendar.getInstance()
+        } else {
+            requireArguments().getSerializable(CALENDAR) as Calendar
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.isExit.collect {
+                viewModel.isSaved.collect {
                     if (it) {
+                        showToast(R.string.note_saved)
                         parentFragmentManager.popBackStack()
+                    } else {
+                        showToast(R.string.note_save_error)
                     }
                 }
             }
@@ -63,6 +74,10 @@ class NoteCreatorFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showToast(@StringRes stringId: Int) {
+        Toast.makeText(requireContext(), stringId, Toast.LENGTH_SHORT).show()
     }
 
     private fun setClickListeners() {
@@ -93,8 +108,21 @@ class NoteCreatorFragment : Fragment() {
         binding.btnCompleteDescription.setOnClickListener {
             changeKeyboardVisibility(false, requireContext(), binding.etDescription)
             binding.etDescription.clearFocus()
+            binding.etDescription.setText(
+                binding.etDescription.text.trim()
+            )
+
         }
         binding.btnSaveNote.setOnClickListener {
+            saveNote()
+        }
+        binding.btnBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
+    }
+
+    private fun saveNote() {
+        if (binding.etName.text.isNotEmpty()) {
             val note = Note(
                 0,
                 viewModel.startTime,
@@ -103,6 +131,10 @@ class NoteCreatorFragment : Fragment() {
                 binding.etDescription.text.toString()
             )
             viewModel.saveNote(note)
+        } else {
+            binding.etName.requestFocus()
+            changeKeyboardVisibility(true, requireContext(), binding.etName)
+            showToast(R.string.enter_name)
         }
     }
 
@@ -137,6 +169,7 @@ class NoteCreatorFragment : Fragment() {
             requireContext(),
             R.style.DatePickerStyle,
             { _, hourOfDay, minute ->
+                Log.d("NOTE_TIME", hourOfDay.toString())
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
                 calendar.set(Calendar.MINUTE, minute)
                 button.text = calendar.time.getFormatTime()

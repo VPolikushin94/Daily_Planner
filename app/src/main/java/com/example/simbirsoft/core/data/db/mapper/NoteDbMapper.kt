@@ -1,5 +1,6 @@
 package com.example.simbirsoft.core.data.db.mapper
 
+import android.util.Log
 import com.example.simbirsoft.core.data.db.entity.NoteEntity
 import com.example.simbirsoft.notes.domain.models.HourTimetableItem
 import com.example.simbirsoft.core.domain.models.Note
@@ -38,7 +39,7 @@ class NoteDbMapper {
         )
     }
 
-    fun map(noteEntityList: List<NoteEntity>, currentDay: Calendar): List<HourTimetableItem> {
+    fun map(noteEntityList: List<NoteEntity>, selectedDay: Calendar): List<HourTimetableItem> {
         val timetableItemList = MutableList(24) {
             HourTimetableItem(
                 it,
@@ -53,12 +54,13 @@ class NoteDbMapper {
             calendarStart.timeInMillis = noteEntity.dateStart.toMillis()
             calendarFinish.timeInMillis = noteEntity.dateFinish.toMillis()
 
-            val hourStart = if (isSameDay(calendarStart, currentDay)) {
+            Log.d("NOTE_TIME", "id = ${ noteEntity.id }, timeStart = ${ calendarStart }")
+            val hourStart = if (isSameDay(calendarStart, selectedDay)) {
                 calendarStart.get(Calendar.HOUR_OF_DAY)
             } else {
                 FIRST_HOUR
             }
-            val hourFinish = if (isSameDay(calendarFinish, currentDay)) {
+            val hourFinish = if (isSameDay(calendarFinish, selectedDay)) {
                 calendarFinish.get(Calendar.HOUR_OF_DAY)
             } else {
                 LAST_HOUR

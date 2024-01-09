@@ -35,6 +35,7 @@ class NotesViewModel(
     fun getDayNoteList(calendar: Calendar) {
         _selectedDate = calendar
         viewModelScope.launch(Dispatchers.IO) {
+            _screenState.emit(NotesScreenState.Loading)
             val dayNoteList = notesInteractor.getDayNoteList(calendar)
             _screenState.emit(NotesScreenState.TimetableContent(dayNoteList))
         }
@@ -42,7 +43,6 @@ class NotesViewModel(
 
     fun getMonthNoteList(calendar: Calendar) {
         viewModelScope.launch(Dispatchers.IO) {
-            _screenState.emit(NotesScreenState.Loading)
             val monthNoteList = notesInteractor.getMonthNoteList(calendar)
             processResult(monthNoteList)
         }

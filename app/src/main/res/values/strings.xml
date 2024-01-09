@@ -9,8 +9,13 @@
     <string name="description">Описание:  %s</string>
     <string name="note_creator_description">Описание</string>
     <string name="new_task">Новая задача</string>
-    <string name="note_name">Название</string>
+    <string name="note_name">Название*</string>
     <string name="save">Сохранить</string>
     <string name="complete_description">кнопка завершить ввод описания</string>
+    <string name="note_saved">Задача сохранена</string>
+    <string name="note_save_error">Ошибка сохранения!</string>
+    <string name="enter_name">Введите название</string>
+    <string name="server_error">Ошибка сервера!</string>
+    <string name="connection_error">Ошибка подключения!</string>
 
 </resources>

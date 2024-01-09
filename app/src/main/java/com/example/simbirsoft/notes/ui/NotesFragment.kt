@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +17,7 @@ import com.example.simbirsoft.R
 import com.example.simbirsoft.databinding.FragmentNotesBinding
 import com.example.simbirsoft.note_creator.ui.NoteCreatorFragment
 import com.example.simbirsoft.note_details.ui.NoteDetailFragment
+import com.example.simbirsoft.notes.domain.models.ErrorType
 import com.example.simbirsoft.notes.domain.models.TimetableItem
 import com.example.simbirsoft.notes.ui.adapter.HourTimetableAdapter
 import com.example.simbirsoft.notes.ui.models.NotesScreenState
@@ -131,16 +134,25 @@ class NotesFragment : Fragment() {
             }
 
             is NotesScreenState.TimetableContent -> {
+                showProgressBar(false)
                 adapter?.submitList(state.hourTimetableList)
             }
 
             is NotesScreenState.Error -> {
-
+                val stringId = when (state.errorType) {
+                    ErrorType.SERVER_ERROR -> R.string.server_error
+                    ErrorType.INTERNET_ERROR -> R.string.connection_error
+                }
+                Toast.makeText(requireContext(), stringId, Toast.LENGTH_SHORT).show()
             }
 
             is NotesScreenState.Loading -> {
-
+                showProgressBar(true)
             }
         }
+    }
+
+    private fun showProgressBar(isVisible: Boolean) {
+        binding.progressBar.isVisible = isVisible
     }
 }

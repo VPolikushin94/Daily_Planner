@@ -4,5 +4,5 @@ import com.example.simbirsoft.core.domain.models.Note
 
 interface NoteCreatorRepository {
 
-    suspend fun saveNote(note: Note)
+    suspend fun saveNote(note: Note): Boolean
 }

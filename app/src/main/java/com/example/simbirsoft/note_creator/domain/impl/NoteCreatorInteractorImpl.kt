@@ -7,7 +7,7 @@ import com.example.simbirsoft.note_creator.domain.api.NoteCreatorRepository
 class NoteCreatorInteractorImpl(
     private val noteCreatorRepository: NoteCreatorRepository
 ) : NoteCreatorInteractor {
-    override suspend fun saveNote(note: Note) {
-        noteCreatorRepository.saveNote(note)
+    override suspend fun saveNote(note: Note): Boolean {
+        return noteCreatorRepository.saveNote(note)
     }
 }
