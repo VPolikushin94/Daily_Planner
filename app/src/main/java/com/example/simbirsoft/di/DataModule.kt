@@ -10,6 +10,8 @@ import com.example.simbirsoft.core.data.network.api.NetworkClient
 import com.example.simbirsoft.core.data.network.api.NoteService
 import com.example.simbirsoft.core.data.network.impl.NetworkClientImpl
 import com.example.simbirsoft.core.data.network.impl.NoteServiceImpl
+import com.example.simbirsoft.note_creator.data.repository.NoteCreatorRepositoryImpl
+import com.example.simbirsoft.note_creator.domain.api.NoteCreatorRepository
 import com.example.simbirsoft.note_details.data.repository.NoteDetailsRepositoryImpl
 import com.example.simbirsoft.note_details.domain.api.NoteDetailsRepository
 import com.example.simbirsoft.notes.data.repository.NotesRepositoryImpl
@@ -58,6 +60,13 @@ val dataModule = module {
 
     single<NoteDetailsRepository> {
         NoteDetailsRepositoryImpl(
+            appDatabase = get(),
+            noteDbMapper = get()
+        )
+    }
+
+    single<NoteCreatorRepository> {
+        NoteCreatorRepositoryImpl(
             appDatabase = get(),
             noteDbMapper = get()
         )

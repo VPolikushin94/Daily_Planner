@@ -1,5 +1,7 @@
 package com.example.simbirsoft.di
 
+import com.example.simbirsoft.note_creator.domain.api.NoteCreatorInteractor
+import com.example.simbirsoft.note_creator.domain.impl.NoteCreatorInteractorImpl
 import com.example.simbirsoft.note_details.domain.api.NoteDetailsInteractor
 import com.example.simbirsoft.note_details.domain.impl.NoteDetailsInteractorImpl
 import com.example.simbirsoft.notes.domain.api.NotesInteractor
@@ -17,6 +19,12 @@ val interactorModule = module {
     factory<NoteDetailsInteractor> {
         NoteDetailsInteractorImpl(
             noteDetailsRepository = get()
+        )
+    }
+
+    factory<NoteCreatorInteractor> {
+        NoteCreatorInteractorImpl(
+            noteCreatorRepository = get()
         )
     }
 }

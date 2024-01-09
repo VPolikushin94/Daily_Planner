@@ -10,6 +10,7 @@ import com.example.simbirsoft.core.domain.models.Note
 import com.example.simbirsoft.notes.domain.models.Resource
 import com.example.simbirsoft.notes.ui.models.NotesScreenState
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
@@ -24,6 +25,8 @@ class NotesViewModel(
     val screenState: SharedFlow<NotesScreenState> = _screenState
 
     private var _selectedDate: Calendar? = null
+
+    private var isClickAllowed = true
 
     fun getSelectedDate(): Calendar {
         return _selectedDate ?: Calendar.getInstance()
@@ -80,5 +83,21 @@ class NotesViewModel(
     private fun addEventToSet(calendar: Calendar, eventSet: MutableSet<EventDay>) {
         val eventDay = EventDay(calendar, R.drawable.ic_fire)
         eventSet.add(eventDay)
+    }
+
+    fun clickDebounce(): Boolean {
+        val current = isClickAllowed
+        if (isClickAllowed) {
+            isClickAllowed = false
+            viewModelScope.launch {
+                delay(CLICK_DEBOUNCE_DELAY_MILLIS)
+                isClickAllowed = true
+            }
+        }
+        return current
+    }
+
+    companion object {
+        private const val CLICK_DEBOUNCE_DELAY_MILLIS = 1000L
     }
 }

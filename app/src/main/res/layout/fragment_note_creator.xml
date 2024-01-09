@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorPrimary"
@@ -53,6 +54,8 @@
         android:singleLine="true"
         android:textColor="?attr/colorOnPrimary"
         android:imeOptions="actionDone"
+        android:paddingVertical="@dimen/size_10"
+        android:background="@drawable/edittext_background"
         app:layout_constraintEnd_toEndOf="@id/gl_end"
         app:layout_constraintStart_toStartOf="@id/gl_begin"
         app:layout_constraintTop_toBottomOf="@id/btn_back" />
@@ -123,18 +126,32 @@
         android:id="@+id/et_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_12"
         android:hint="@string/note_creator_description"
         android:paddingStart="@dimen/size_16"
         android:paddingEnd="0dp"
         android:textColor="?attr/colorOnPrimary"
         android:imeOptions="actionDone"
         android:maxLines="5"
+        android:paddingVertical="@dimen/size_10"
         android:inputType="textMultiLine"
         android:scrollbars="vertical"
+        android:background="@drawable/edittext_background"
         app:layout_constraintStart_toStartOf="@id/gl_begin"
         app:layout_constraintEnd_toStartOf="@id/gl_end"
         app:layout_constraintTop_toBottomOf="@id/btn_pick_time_end"/>
+
+    <ImageButton
+        android:id="@+id/btn_complete_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_description_background"
+        android:src="@drawable/ic_check"
+        android:padding="@dimen/size_8"
+        android:layout_marginStart="@dimen/size_8"
+        android:contentDescription="@string/complete_description"
+        app:layout_constraintBottom_toBottomOf="@id/et_description"
+        app:layout_constraintEnd_toEndOf="@id/et_description" />
 
     <Button
         style="@style/BtnPickerStyle"

@@ -21,6 +21,8 @@ val viewModelModule = module {
     }
 
     viewModel {
-        NoteCreatorViewModel()
+        NoteCreatorViewModel(
+            noteCreatorInteractor = get()
+        )
     }
 }

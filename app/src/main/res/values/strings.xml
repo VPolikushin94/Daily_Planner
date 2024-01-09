@@ -11,5 +11,6 @@
     <string name="new_task">Новая задача</string>
     <string name="note_name">Название</string>
     <string name="save">Сохранить</string>
+    <string name="complete_description">кнопка завершить ввод описания</string>
 
 </resources>

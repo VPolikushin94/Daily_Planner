@@ -1,5 +1,6 @@
 package com.example.simbirsoft.note_creator.ui
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
@@ -9,11 +10,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.simbirsoft.R
+import com.example.simbirsoft.core.domain.models.Note
 import com.example.simbirsoft.databinding.FragmentNoteCreatorBinding
 import com.example.simbirsoft.note_creator.ui.view_model.NoteCreatorViewModel
+import com.example.simbirsoft.util.changeKeyboardVisibility
 import com.example.simbirsoft.util.getFormatDate
 import com.example.simbirsoft.util.getFormatTime
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Calendar
 
@@ -38,8 +45,24 @@ class NoteCreatorFragment : Fragment() {
 
         val selectedDate = requireArguments().getSerializable(CALENDAR) as Calendar
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.isExit.collect {
+                    if (it) {
+                        parentFragmentManager.popBackStack()
+                    }
+                }
+            }
+        }
+
         setSelectedDate(selectedDate)
         setClickListeners()
+        setTouchListeners()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setClickListeners() {
@@ -66,6 +89,30 @@ class NoteCreatorFragment : Fragment() {
                 viewModel.endTime,
                 binding.btnPickTimeEnd
             )
+        }
+        binding.btnCompleteDescription.setOnClickListener {
+            changeKeyboardVisibility(false, requireContext(), binding.etDescription)
+            binding.etDescription.clearFocus()
+        }
+        binding.btnSaveNote.setOnClickListener {
+            val note = Note(
+                0,
+                viewModel.startTime,
+                viewModel.endTime,
+                binding.etName.text.toString(),
+                binding.etDescription.text.toString()
+            )
+            viewModel.saveNote(note)
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setTouchListeners() {
+        binding.clScreen.setOnTouchListener { _, _ ->
+            changeKeyboardVisibility(false, requireContext(), binding.etDescription)
+            binding.etDescription.clearFocus()
+            binding.etName.clearFocus()
+            false
         }
     }
 

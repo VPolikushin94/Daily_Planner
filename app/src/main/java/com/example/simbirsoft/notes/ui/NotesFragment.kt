@@ -97,10 +97,12 @@ class NotesFragment : Fragment() {
             }
         })
         onNoteClickListener = {
-            parentFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, NoteDetailFragment.newInstance(it.id))
-                .addToBackStack(null)
-                .commit()
+            if (viewModel.clickDebounce()) {
+                parentFragmentManager.beginTransaction()
+                    .add(R.id.fragment_container, NoteDetailFragment.newInstance(it.id))
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
         binding.btnAddNote.setOnClickListener {
             parentFragmentManager.beginTransaction()
