@@ -1,9 +1,8 @@
 package com.example.simbirsoft.core.data.db.mapper
 
-import android.util.Log
 import com.example.simbirsoft.core.data.db.entity.NoteEntity
-import com.example.simbirsoft.notes.domain.models.HourTimetableItem
 import com.example.simbirsoft.core.domain.models.Note
+import com.example.simbirsoft.notes.domain.models.HourTimetableItem
 import com.example.simbirsoft.notes.domain.models.TimetableItem
 import com.example.simbirsoft.util.getFormatDateTimeWithoutYear
 import com.example.simbirsoft.util.isSameDay
@@ -54,14 +53,21 @@ class NoteDbMapper {
             calendarStart.timeInMillis = noteEntity.dateStart.toMillis()
             calendarFinish.timeInMillis = noteEntity.dateFinish.toMillis()
 
-            Log.d("NOTE_TIME", "id = ${ noteEntity.id }, timeStart = ${ calendarStart }")
             val hourStart = if (isSameDay(calendarStart, selectedDay)) {
                 calendarStart.get(Calendar.HOUR_OF_DAY)
             } else {
                 FIRST_HOUR
             }
             val hourFinish = if (isSameDay(calendarFinish, selectedDay)) {
-                calendarFinish.get(Calendar.HOUR_OF_DAY)
+                if (
+                    isDayEnd(calendarFinish) &&
+                    !isSameDay(calendarStart, selectedDay)
+                ) return@forEach
+                if (isDayEnd(calendarFinish)) {
+                    LAST_HOUR
+                } else {
+                    calendarFinish.get(Calendar.HOUR_OF_DAY)
+                }
             } else {
                 LAST_HOUR
             }
@@ -79,6 +85,11 @@ class NoteDbMapper {
         }
 
         return timetableItemList
+    }
+
+    private fun isDayEnd(calendar: Calendar): Boolean {
+        return calendar.get(Calendar.HOUR_OF_DAY) == FIRST_HOUR &&
+                calendar.get(Calendar.MINUTE) == 0
     }
 
     companion object {

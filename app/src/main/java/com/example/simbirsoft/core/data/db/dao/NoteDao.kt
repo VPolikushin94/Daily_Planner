@@ -20,21 +20,16 @@ interface NoteDao {
 
     @Query(
         "SELECT * FROM notes_table WHERE " +
-                "CAST(strftime('%m',dateStart,'unixepoch') AS INTEGER) = :month AND " +
-                "CAST(strftime('%Y',dateStart,'unixepoch') AS INTEGER) = :year OR " +
-                "CAST(strftime('%m',dateFinish,'unixepoch') AS INTEGER) = :month AND " +
-                "CAST(strftime('%Y',dateFinish,'unixepoch') AS INTEGER) = :year"
+                "CAST(strftime('%m',dateStart,'unixepoch', 'localtime') AS INTEGER) = :month AND " +
+                "CAST(strftime('%Y',dateStart,'unixepoch', 'localtime') AS INTEGER) = :year OR " +
+                "CAST(strftime('%m',dateFinish,'unixepoch', 'localtime') AS INTEGER) = :month AND " +
+                "CAST(strftime('%Y',dateFinish,'unixepoch', 'localtime') AS INTEGER) = :year "
     )
     suspend fun getMonthNotes(month: Int, year: Int): List<NoteEntity>
 
     @Query(
-        "SELECT * FROM notes_table WHERE " +
-                "CAST(strftime('%d',dateStart,'unixepoch') AS INTEGER) <= :day AND " +
-                "CAST(strftime('%m',dateStart,'unixepoch') AS INTEGER) <= :month AND " +
-                "CAST(strftime('%Y',dateStart,'unixepoch') AS INTEGER) <= :year AND " +
-                "CAST(strftime('%d',dateFinish,'unixepoch') AS INTEGER) >= :day AND " +
-                "CAST(strftime('%m',dateFinish,'unixepoch') AS INTEGER) >= :month AND " +
-                "CAST(strftime('%Y',dateFinish,'unixepoch') AS INTEGER) >= :year"
+        "SELECT * FROM notes_table WHERE date(:date,'unixepoch', 'localtime') BETWEEN " +
+                "date(dateStart,'unixepoch', 'localtime') AND date(dateFinish,'unixepoch', 'localtime')"
     )
-    suspend fun getDayNotes(day: Int, month: Int, year: Int): List<NoteEntity>
+    suspend fun getDayNotes(date: Long): List<NoteEntity>
 }

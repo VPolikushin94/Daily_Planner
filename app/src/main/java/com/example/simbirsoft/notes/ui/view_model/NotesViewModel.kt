@@ -35,7 +35,7 @@ class NotesViewModel(
     fun getDayNoteList(calendar: Calendar) {
         _selectedDate = calendar
         viewModelScope.launch(Dispatchers.IO) {
-            _screenState.emit(NotesScreenState.Loading)
+            _screenState.emit(NotesScreenState.Loading(false))
             val dayNoteList = notesInteractor.getDayNoteList(calendar)
             _screenState.emit(NotesScreenState.TimetableContent(dayNoteList))
         }
@@ -43,6 +43,7 @@ class NotesViewModel(
 
     fun getMonthNoteList(calendar: Calendar) {
         viewModelScope.launch(Dispatchers.IO) {
+            _screenState.emit(NotesScreenState.Loading(true))
             val monthNoteList = notesInteractor.getMonthNoteList(calendar)
             processResult(monthNoteList)
         }
@@ -75,7 +76,12 @@ class NotesViewModel(
             betweenDates.forEach { calendar ->
                 addEventToSet(calendar, eventSet)
             }
-            addEventToSet(note.calendarFinish, eventSet)
+            if (
+                note.calendarFinish.get(Calendar.HOUR_OF_DAY) != 0 &&
+                note.calendarFinish.get(Calendar.MINUTE) != 0
+            ) {
+                addEventToSet(note.calendarFinish, eventSet)
+            }
         }
         return eventSet.toList()
     }

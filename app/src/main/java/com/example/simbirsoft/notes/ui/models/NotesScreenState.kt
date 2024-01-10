@@ -6,7 +6,7 @@ import com.example.simbirsoft.notes.domain.models.HourTimetableItem
 
 sealed interface NotesScreenState {
 
-    data object Loading : NotesScreenState
+    data class Loading(val isCalendarLoading: Boolean) : NotesScreenState
 
     data class CalendarContent(val eventList: List<EventDay>) : NotesScreenState
 

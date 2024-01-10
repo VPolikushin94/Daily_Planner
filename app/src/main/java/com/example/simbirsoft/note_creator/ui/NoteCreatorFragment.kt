@@ -20,6 +20,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.simbirsoft.R
 import com.example.simbirsoft.core.domain.models.Note
 import com.example.simbirsoft.databinding.FragmentNoteCreatorBinding
+import com.example.simbirsoft.note_creator.ui.models.SaveErrorType
+import com.example.simbirsoft.note_creator.ui.models.SaveState
 import com.example.simbirsoft.note_creator.ui.view_model.NoteCreatorViewModel
 import com.example.simbirsoft.util.changeKeyboardVisibility
 import com.example.simbirsoft.util.getFormatDate
@@ -48,7 +50,8 @@ class NoteCreatorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val selectedDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requireArguments().getSerializable(CALENDAR, Calendar::class.java) ?: Calendar.getInstance()
+            requireArguments().getSerializable(CALENDAR, Calendar::class.java)
+                ?: Calendar.getInstance()
         } else {
             requireArguments().getSerializable(CALENDAR) as Calendar
         }
@@ -56,12 +59,7 @@ class NoteCreatorFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.isSaved.collect {
-                    if (it) {
-                        showToast(R.string.note_saved)
-                        parentFragmentManager.popBackStack()
-                    } else {
-                        showToast(R.string.note_save_error)
-                    }
+                    showSaveState(it)
                 }
             }
         }
@@ -74,6 +72,35 @@ class NoteCreatorFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showSaveState(state: SaveState) {
+        when (state) {
+            is SaveState.Success -> {
+                showToast(R.string.note_saved)
+                parentFragmentManager.popBackStack()
+            }
+
+            is SaveState.Error -> {
+                showError(state.saveErrorType)
+            }
+        }
+    }
+
+    private fun showError(errorType: SaveErrorType) {
+        when (errorType) {
+            SaveErrorType.EMPTY_NAME -> {
+                binding.etName.requestFocus()
+                changeKeyboardVisibility(true, requireContext(), binding.etName)
+                showToast(R.string.enter_name)
+            }
+
+            SaveErrorType.DB_ERROR -> showToast(R.string.note_save_error)
+
+            SaveErrorType.SAME_DATE -> showToast(R.string.same_time_error)
+
+            SaveErrorType.FINISH_BEFORE_START -> showToast(R.string.finish_before_start)
+        }
     }
 
     private fun showToast(@StringRes stringId: Int) {
@@ -122,26 +149,23 @@ class NoteCreatorFragment : Fragment() {
     }
 
     private fun saveNote() {
-        if (binding.etName.text.isNotEmpty()) {
-            val note = Note(
-                0,
-                viewModel.startTime,
-                viewModel.endTime,
-                binding.etName.text.toString(),
-                binding.etDescription.text.toString()
-            )
-            viewModel.saveNote(note)
-        } else {
-            binding.etName.requestFocus()
-            changeKeyboardVisibility(true, requireContext(), binding.etName)
-            showToast(R.string.enter_name)
-        }
+        val note = Note(
+            0,
+            viewModel.startTime,
+            viewModel.endTime,
+            binding.etName.text.toString(),
+            binding.etDescription.text.toString()
+        )
+        viewModel.saveNote(note)
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setTouchListeners() {
         binding.clScreen.setOnTouchListener { _, _ ->
             changeKeyboardVisibility(false, requireContext(), binding.etDescription)
+            binding.etDescription.setText(
+                binding.etDescription.text.trim()
+            )
             binding.etDescription.clearFocus()
             binding.etName.clearFocus()
             false

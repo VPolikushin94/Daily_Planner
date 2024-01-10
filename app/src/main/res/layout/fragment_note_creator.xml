@@ -129,7 +129,7 @@
         android:layout_marginTop="@dimen/size_12"
         android:hint="@string/note_creator_description"
         android:paddingStart="@dimen/size_16"
-        android:paddingEnd="0dp"
+        android:paddingEnd="@dimen/size_40"
         android:textColor="?attr/colorOnPrimary"
         android:imeOptions="actionDone"
         android:maxLines="5"

@@ -1,6 +1,7 @@
 package com.example.simbirsoft.notes.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -126,16 +127,18 @@ class NotesFragment : Fragment() {
     }
 
     private fun render(state: NotesScreenState) {
+        Log.d("NOTE_STATE", state.toString())
         when (state) {
             is NotesScreenState.CalendarContent -> {
                 binding.calendar.setEvents(
                     state.eventList
                 )
+                showProgressBar(false)
             }
 
             is NotesScreenState.TimetableContent -> {
-                showProgressBar(false)
                 adapter?.submitList(state.hourTimetableList)
+                showProgressBar(false)
             }
 
             is NotesScreenState.Error -> {
@@ -147,12 +150,24 @@ class NotesFragment : Fragment() {
             }
 
             is NotesScreenState.Loading -> {
-                showProgressBar(true)
+                showProgressBar(true, state.isCalendarLoading)
+                adapter?.submitList(null)
             }
         }
     }
 
-    private fun showProgressBar(isVisible: Boolean) {
-        binding.progressBar.isVisible = isVisible
+    private fun showProgressBar(isVisible: Boolean, isCalendarLoading: Boolean? = null) {
+        if (isVisible) {
+            isCalendarLoading?.let {
+                if (it) {
+                    binding.progressBarCalendar.isVisible = true
+                } else {
+                    binding.progressBarTimetable.isVisible = true
+                }
+            }
+        } else {
+            binding.progressBarCalendar.isVisible = false
+            binding.progressBarTimetable.isVisible = false
+        }
     }
 }

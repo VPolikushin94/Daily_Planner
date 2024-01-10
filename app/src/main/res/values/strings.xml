@@ -17,5 +17,7 @@
     <string name="enter_name">Введите название</string>
     <string name="server_error">Ошибка сервера!</string>
     <string name="connection_error">Ошибка подключения!</string>
+    <string name="same_time_error">Время начала и окончания задачи\nне может быть одинаковой!</string>
+    <string name="finish_before_start">Время окончания задачи\nне может быть раньше начала!</string>
 
 </resources>
