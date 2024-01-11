@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.getDatesRange
 import com.example.simbirsoft.R
-import com.example.simbirsoft.notes.domain.api.NotesInteractor
 import com.example.simbirsoft.core.domain.models.Note
+import com.example.simbirsoft.notes.domain.api.NotesInteractor
 import com.example.simbirsoft.notes.domain.models.Resource
 import com.example.simbirsoft.notes.ui.models.NotesScreenState
 import kotlinx.coroutines.Dispatchers
@@ -76,9 +76,14 @@ class NotesViewModel(
             betweenDates.forEach { calendar ->
                 addEventToSet(calendar, eventSet)
             }
+            val calendar = Calendar.getInstance()
+            calendar.set(Calendar.YEAR, note.calendarFinish.get(Calendar.YEAR))
+            calendar.set(Calendar.MONTH, note.calendarFinish.get(Calendar.MONTH))
+            calendar.set(Calendar.DAY_OF_MONTH, note.calendarFinish.get(Calendar.DAY_OF_MONTH))
+            calendar.set(Calendar.MINUTE, 0)
+            calendar.set(Calendar.HOUR_OF_DAY, 0)
             if (
-                note.calendarFinish.get(Calendar.HOUR_OF_DAY) != 0 &&
-                note.calendarFinish.get(Calendar.MINUTE) != 0
+                calendar.before(note.calendarFinish)
             ) {
                 addEventToSet(note.calendarFinish, eventSet)
             }

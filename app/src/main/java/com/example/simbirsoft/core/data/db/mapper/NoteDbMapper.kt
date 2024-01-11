@@ -73,6 +73,11 @@ class NoteDbMapper {
             }
 
             for (hour in hourStart..hourFinish) {
+                if (
+                    hour == hourFinish &&
+                    hourFinish == calendarFinish.get(Calendar.HOUR_OF_DAY) &&
+                    calendarFinish.get(Calendar.MINUTE) == ZERO_MINUTE
+                ) return@forEach
                 timetableItemList[hour].timetableItems.add(
                     TimetableItem(
                         noteEntity.id,
@@ -89,11 +94,12 @@ class NoteDbMapper {
 
     private fun isDayEnd(calendar: Calendar): Boolean {
         return calendar.get(Calendar.HOUR_OF_DAY) == FIRST_HOUR &&
-                calendar.get(Calendar.MINUTE) == 0
+                calendar.get(Calendar.MINUTE) == ZERO_MINUTE
     }
 
     companion object {
         private const val FIRST_HOUR = 0
+        private const val ZERO_MINUTE = 0
         private const val LAST_HOUR = 23
     }
 }

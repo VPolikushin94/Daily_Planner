@@ -58,11 +58,14 @@ class NotesFragment : Fragment() {
         }
 
         setClickListeners()
-        getMonthNotes()
         setRecyclerViewAdapter()
         getFirstSelectedDateNotes()
     }
 
+    override fun onStart() {
+        super.onStart()
+        getMonthNotes()
+    }
 
     private fun setRecyclerViewAdapter() {
         adapter = HourTimetableAdapter(
