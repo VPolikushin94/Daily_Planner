@@ -56,7 +56,8 @@ class NotesRepositoryImpl(
 
     override suspend fun getDayNoteList(calendar: Calendar): List<HourTimetableItem> {
         val date = calendar.timeInMillis.toTimestamp()
-        return noteDbMapper.map(noteDao.getDayNotes(date), calendar)
+        val noteEntityList = noteDao.getDayNotes(date)
+        return noteDbMapper.map(noteEntityList, calendar)
     }
 
     private fun getResource(

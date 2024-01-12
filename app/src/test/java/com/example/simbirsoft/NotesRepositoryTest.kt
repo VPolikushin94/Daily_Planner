@@ -8,6 +8,7 @@ import com.example.simbirsoft.core.data.mapper.NoteDtoMapper
 import com.example.simbirsoft.core.data.network.api.NetworkClient
 import com.example.simbirsoft.notes.data.repository.NotesRepositoryImpl
 import com.example.simbirsoft.notes.domain.models.HourTimetableItem
+import com.example.simbirsoft.notes.domain.models.TimetableItem
 import com.example.simbirsoft.util.toTimestamp
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -49,9 +50,29 @@ class NotesRepositoryTest {
     @Test
     fun getDayNoteList() = runBlocking {
         val noteDao: NoteDao = mockk()
-        val noteEntityList: List<NoteEntity> = mockk()
-        val hourTimetableItemList: List<HourTimetableItem> = mockk()
+        val noteEntityList: List<NoteEntity> = listOf(
+            NoteEntity(
+                id = 6,
+                dateStart = 1704967200, //11 jan 2024 13:00
+                dateFinish = 1704982500,//11 jan 2024 17:15
+                name = "test 1",
+                description = "test description"
+            )
+        )
+        val hourTimetableItemList = MutableList(24) {
+            HourTimetableItem(
+                it,
+                mutableListOf()
+            )
+        }
+        hourTimetableItemList[13].timetableItems.add(TimetableItem(id=6, name="test 1", time="11 янв. 13:00 - 11 янв. 17:15"))
+        hourTimetableItemList[14].timetableItems.add(TimetableItem(id=6, name="test 1", time="11 янв. 13:00 - 11 янв. 17:15"))
+        hourTimetableItemList[15].timetableItems.add(TimetableItem(id=6, name="test 1", time="11 янв. 13:00 - 11 янв. 17:15"))
+        hourTimetableItemList[16].timetableItems.add(TimetableItem(id=6, name="test 1", time="11 янв. 13:00 - 11 янв. 17:15"))
+        hourTimetableItemList[17].timetableItems.add(TimetableItem(id=6, name="test 1", time="11 янв. 13:00 - 11 янв. 17:15"))
+
         val calendar: Calendar = Calendar.getInstance()
+        calendar.set(2024, 0, 11)
         val date = calendar.timeInMillis.toTimestamp()
 
         every { appDatabase.noteDao() } returns noteDao
