@@ -41,21 +41,22 @@
         app:layout_constraintGuide_end="@dimen/size_16" />
 
     <EditText
-        style="@style/DetailsTvStyle"
         android:id="@+id/et_name"
+        style="@style/DetailsTvStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_8"
+        android:background="@drawable/edittext_background"
         android:hint="@string/note_name"
+        android:imeOptions="actionDone"
         android:inputType="text"
         android:maxLines="1"
+        android:paddingVertical="@dimen/size_10"
         android:paddingStart="@dimen/size_16"
         android:paddingEnd="0dp"
         android:singleLine="true"
         android:textColor="?attr/colorOnPrimary"
-        android:imeOptions="actionDone"
-        android:paddingVertical="@dimen/size_10"
-        android:background="@drawable/edittext_background"
+        android:textCursorDrawable="@drawable/edittext_cursor"
         app:layout_constraintEnd_toEndOf="@id/gl_end"
         app:layout_constraintStart_toStartOf="@id/gl_begin"
         app:layout_constraintTop_toBottomOf="@id/btn_back" />
@@ -65,25 +66,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_16"
-        app:layout_constraintStart_toStartOf="@id/gl_begin"
-        app:layout_constraintTop_toTopOf="@id/btn_pick_date_start"
+        android:text="@string/start"
         app:layout_constraintBottom_toBottomOf="@id/btn_pick_date_start"
-        android:text="@string/start"/>
+        app:layout_constraintStart_toStartOf="@id/gl_begin"
+        app:layout_constraintTop_toTopOf="@id/btn_pick_date_start" />
 
     <Button
-        style="@style/BtnPickerStyle"
         android:id="@+id/btn_pick_date_start"
+        style="@style/BtnPickerStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/size_4"
+        app:layout_constraintBottom_toBottomOf="@id/btn_pick_time_start"
         app:layout_constraintEnd_toStartOf="@id/btn_pick_time_start"
         app:layout_constraintTop_toTopOf="@id/btn_pick_time_start"
-        app:layout_constraintBottom_toBottomOf="@id/btn_pick_time_start"
         tools:text="8 янв. 2024" />
 
     <Button
-        style="@style/BtnPickerStyle"
         android:id="@+id/btn_pick_time_start"
+        style="@style/BtnPickerStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_8"
@@ -96,25 +97,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_16"
-        app:layout_constraintStart_toStartOf="@id/gl_begin"
-        app:layout_constraintTop_toTopOf="@id/btn_pick_date_end"
+        android:text="@string/finish"
         app:layout_constraintBottom_toBottomOf="@id/btn_pick_date_end"
-        android:text="@string/finish"/>
+        app:layout_constraintStart_toStartOf="@id/gl_begin"
+        app:layout_constraintTop_toTopOf="@id/btn_pick_date_end" />
 
     <Button
-        style="@style/BtnPickerStyle"
         android:id="@+id/btn_pick_date_end"
+        style="@style/BtnPickerStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/size_4"
+        app:layout_constraintBottom_toBottomOf="@id/btn_pick_time_end"
         app:layout_constraintEnd_toStartOf="@id/btn_pick_time_end"
         app:layout_constraintTop_toTopOf="@id/btn_pick_time_end"
-        app:layout_constraintBottom_toBottomOf="@id/btn_pick_time_end"
         tools:text="9 янв. 2024" />
 
     <Button
-        style="@style/BtnPickerStyle"
         android:id="@+id/btn_pick_time_end"
+        style="@style/BtnPickerStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_8"
@@ -127,42 +128,43 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_12"
+        android:background="@drawable/edittext_background"
         android:hint="@string/note_creator_description"
-        android:paddingStart="@dimen/size_16"
-        android:paddingEnd="@dimen/size_40"
-        android:textColor="?attr/colorOnPrimary"
         android:imeOptions="actionDone"
+        android:inputType="textMultiLine"
         android:maxLines="5"
         android:paddingVertical="@dimen/size_10"
-        android:inputType="textMultiLine"
+        android:paddingStart="@dimen/size_16"
+        android:paddingEnd="@dimen/size_40"
         android:scrollbars="vertical"
-        android:background="@drawable/edittext_background"
-        app:layout_constraintStart_toStartOf="@id/gl_begin"
+        android:textColor="?attr/colorOnPrimary"
+        android:textCursorDrawable="@drawable/edittext_cursor"
         app:layout_constraintEnd_toStartOf="@id/gl_end"
-        app:layout_constraintTop_toBottomOf="@id/btn_pick_time_end"/>
+        app:layout_constraintStart_toStartOf="@id/gl_begin"
+        app:layout_constraintTop_toBottomOf="@id/btn_pick_time_end" />
 
     <ImageButton
         android:id="@+id/btn_complete_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_description_background"
-        android:src="@drawable/ic_check"
-        android:padding="@dimen/size_8"
         android:layout_marginStart="@dimen/size_8"
+        android:background="@drawable/btn_description_background"
         android:contentDescription="@string/complete_description"
+        android:padding="@dimen/size_8"
+        android:src="@drawable/ic_check"
         app:layout_constraintBottom_toBottomOf="@id/et_description"
         app:layout_constraintEnd_toEndOf="@id/et_description" />
 
     <Button
-        style="@style/BtnPickerStyle"
         android:id="@+id/btn_save_note"
+        style="@style/BtnPickerStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_8"
         android:layout_marginBottom="@dimen/size_18"
-        app:layout_constraintStart_toStartOf="@id/gl_begin"
-        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="@string/save" />
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_begin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
