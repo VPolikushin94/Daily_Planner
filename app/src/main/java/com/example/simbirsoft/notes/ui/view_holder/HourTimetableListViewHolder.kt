@@ -14,8 +14,8 @@ class HourTimetableListViewHolder(private val binding: HourTimetableItemBinding)
         model: HourTimetableItem,
         onItemClickListener: (TimetableItem) -> Unit,
     ) {
-        binding.tvStartHour.text = itemView.resources.getString(R.string.hour, model.hour)
-        binding.tvEndHour.text = itemView.resources.getString(R.string.hour, model.hour + 1)
+        binding.dayHourView.startHour = itemView.resources.getString(R.string.hour, model.hour)
+        binding.dayHourView.finishHour = itemView.resources.getString(R.string.hour, model.hour + 1)
 
         val adapter = TimetableItemAdapter(onItemClickListener)
         binding.rvHourRow.adapter = adapter

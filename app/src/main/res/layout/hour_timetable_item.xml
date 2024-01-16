@@ -6,64 +6,38 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/size_12">
 
-    <LinearLayout
-        android:id="@+id/ll_times"
-        android:layout_width="0dp"
+    <com.example.simbirsoft.notes.ui.custom_view.DayHourView
+        android:id="@+id/day_hour_view"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/time_background"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingVertical="@dimen/size_6"
         android:paddingHorizontal="@dimen/size_4"
+        android:paddingVertical="@dimen/size_4"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_10"
+        app:backgroundColor="@color/blue"
+        app:startHour="0:00"
+        app:finishHour="1:00"
+        app:layout_constraintEnd_toStartOf="@id/guide_line"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guide_line">
-
-        <TextView
-            style="@style/TimeTableTvStyle"
-            android:id="@+id/tv_start_hour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_10"
-            android:textColor="@color/white"
-            tools:text="0:00" />
-
-        <View
-            android:id="@+id/line"
-            android:layout_width="1dp"
-            android:layout_height="10dp"
-            android:layout_marginVertical="@dimen/size_1"
-            android:background="@drawable/time_background"
-            android:backgroundTint="@color/white"/>
-
-        <TextView
-            style="@style/TimeTableTvStyle"
-            android:id="@+id/tv_end_hour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_10"
-            android:textColor="@color/white"
-            tools:text="1:00" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="45dp" />
+        app:layout_constraintGuide_begin="46dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_hour_row"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintStart_toEndOf="@id/guide_line"
-        app:layout_constraintTop_toTopOf="@id/ll_times"
-        app:layout_constraintBottom_toBottomOf="@id/ll_times"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/timetable_item"/>
+        app:layout_constraintBottom_toBottomOf="@id/day_hour_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guide_line"
+        app:layout_constraintTop_toTopOf="@id/day_hour_view"
+        tools:listitem="@layout/timetable_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
