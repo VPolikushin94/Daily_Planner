@@ -30,6 +30,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Calendar
 
+
 class NoteCreatorFragment : Fragment() {
 
     private var _binding: FragmentNoteCreatorBinding? = null

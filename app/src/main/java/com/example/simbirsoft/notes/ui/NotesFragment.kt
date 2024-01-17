@@ -1,7 +1,6 @@
 package com.example.simbirsoft.notes.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -130,7 +129,6 @@ class NotesFragment : Fragment() {
     }
 
     private fun render(state: NotesScreenState) {
-        Log.d("NOTE_STATE", state.toString())
         when (state) {
             is NotesScreenState.CalendarContent -> {
                 binding.calendar.setEvents(
