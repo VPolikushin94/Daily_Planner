@@ -8,6 +8,8 @@
 
 - Создание новой задачи
 
+  <img src="https://github.com/VPolikushin94/DailyPlanner/assets/121296133/6249abbf-246b-41a8-a796-0baae2c23b0e" width="250"/> &emsp;
+  <img src="https://github.com/VPolikushin94/DailyPlanner/assets/121296133/968bce0f-1d30-4b6a-aeae-441d17771696" width="250"/> &emsp;
   <img src="https://github.com/VPolikushin94/DailyPlanner/assets/121296133/90e7795d-92e0-405b-afe4-550955a9ef96" width="250"/>
 
 - Просмотр созданной задачи
