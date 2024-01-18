@@ -9,10 +9,10 @@ import com.example.simbirsoft.core.data.db.entity.NoteEntity
 @Dao
 interface NoteDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote(noteEntity: NoteEntity): Long
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNoteList(noteEntityList: List<NoteEntity>)
 
     @Query("SELECT * FROM notes_table WHERE id = :id")
